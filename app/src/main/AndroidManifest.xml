@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Wearables_Final">
         <activity
+            android:name=".ManualActivity"
+            android:exported="true" />
+        <activity
+            android:name=".GPSActivity"
+            android:exported="true" />
+        <activity
+            android:name=".TrophyActivity"
+            android:exported="true" />
+        <activity
+            android:name=".GameActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

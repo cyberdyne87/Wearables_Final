@@ -4,12 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-// This is the starting activity, the main menu!
+// this activity displays the badges that the player has earned!
 
-public class MainActivity extends AppCompatActivity {
+public class TrophyActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_trophy);
     }
 }
