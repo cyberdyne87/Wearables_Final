@@ -92,7 +92,7 @@
         android:layout_height="119dp"
         app:srcCompat="@drawable/asteroidlittle"
         tools:layout_editor_absoluteX="162dp"
-        tools:layout_editor_absoluteY="328dp" />
+        tools:layout_editor_absoluteY="321dp" />
 
     <ImageView
         android:id="@+id/imageView7"
