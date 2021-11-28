@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 
 import java.util.Random;
 
-// this is a basic falling candy
+// this is a basic falling object
 public class FallingObject extends DrawnObject {
 
     public float rotationSpeed = 0f;
