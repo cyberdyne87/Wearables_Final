@@ -65,7 +65,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     // sprite variables
     Bitmap sprite_asteroid;
     Bitmap sprite_meteor;
-    Bitmap sprite_mine;
+    Bitmap sprite_bomb;
     Bitmap sprite_rocket;
 
     @Override
@@ -88,13 +88,13 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         randy = new Random();
 
         // set up rocket
-        // rocket = new Rocketship(SPRITE_HERE, 100, 100, 0, 0, 4);
+        rocket = new Rocketship(sprite_rocket, 100, 100, 0, 0, 4);
 
         // bitmap
-        sprite_asteroid = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.AsteroidBig), 256, 256, false);
-        sprite_meteor = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.AsteroidLittle), 128, 128, false);
-        sprite_mine = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.Mine), 128, 128, false);
-        sprite_rocket = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.RocketShip), 256, 256, false);
+        sprite_asteroid = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.asteroid), 256, 256, false);
+        sprite_meteor = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.meteor), 128, 128, false);
+        sprite_bomb = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.bomb), 128, 128, false);
+        sprite_rocket = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.rocket), 256, 256, false);
     }
 
     // generates a random candy that falls down the screen
@@ -149,11 +149,15 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         if (timeUntilNextObject < 0)
         {
             // spawn a new object if it's time!
-            // objects.add(generateRandomObject(-c.getWidth() / 2f + 100f, c.getWidth() / 2f - 100f));
+            objects.add(generateRandomObject(-c.getWidth() / 2f + 100f, c.getWidth() / 2f - 100f));
 
             // reset timer by random amount
             timeUntilNextObject = randy.nextFloat() * 0.5f + 0.5f;
         }
+
+        // update rocket
+        rocket.update(accel_x, accel_y, 0, c.getWidth(), 0, c.getHeight(), 128);
+        rocket.draw(c);
 
         // stop drawing
         holder.unlockCanvasAndPost(c);
