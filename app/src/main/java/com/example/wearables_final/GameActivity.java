@@ -126,6 +126,9 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         // start drawing
         Canvas c = holder.lockCanvas();
 
+        //ivy added this as a test because something was off on my end, we can remove if not needed.
+        c.drawColor(Color.rgb(0,0,0));
+
         // find time elapsed since last draw call
         float timeElapsed = 0f;
         if (previousTime != -1 && canPlay) timeElapsed = SystemClock.elapsedRealtime() / 1000f - previousTime / 1000f;
