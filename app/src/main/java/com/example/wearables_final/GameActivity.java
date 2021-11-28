@@ -55,7 +55,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     float boostFillSpeed; // how quickly the boost meter should be filled
 
     // generation odds
-    float[] objectTypeOdds = new float[]{0.7f, 0.3f}; // 0 = hazard, 1 = "power" up
+    float[] objectTypeOdds = new float[]{0.85f, 0.15f}; // 0 = hazard, 1 = "power" up
     float[] hazardOdds = new float[]{0.8f, 0.2f}; // 0 = asteroid, 1 = meteor (if enabled)
     float[] powerOdds = new float[]{0.5f, 0.4f, 0.1f}; // 0 = fuel, 1 = heart, 2 = bomb (if enabled)
 
@@ -100,19 +100,19 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         sprite_starBackground = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.starsbackground_vtwo), 1080, 1920, false);
 
         // set up rocket
-        rocket = new Rocketship(sprite_rocket, 100, 100, 0, 0, 4);
+        rocket = new Rocketship(sprite_rocket, 100, 100, 0, 400, 4);
     }
 
     // generates a random obj that falls down the screen
     public FallingObject generateRandomObject(float minX, float maxX) {
         // first, chose a random object type based on odds array
+        FallingObject obj = null;
         float num = randy.nextFloat();
         int toSpawn = 0;
         float totalOdds = 0f;
 
         // pick hazard or powerup
-        for (float i : objectTypeOdds)
-        {
+        for (float i : objectTypeOdds) {
             totalOdds += i;
             // if the total is greater than the generated number, we have our answer!
             if (totalOdds > num)
@@ -123,10 +123,78 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
         // randomize x pos
         float x = randy.nextFloat() * (maxX - minX) + minX;
-        float speed = (int)(randy.nextFloat() * 5) + 30f;
 
-        // temporary
-        return new FallingAsteroid(sprite_asteroid, -1, 5f, speed, x);
+        // spawn a hazard
+        if (toSpawn == 0)
+        {
+            // first, chose a random object type based on odds array
+            num = randy.nextFloat();
+            toSpawn = 0;
+            totalOdds = 0f;
+
+            // pick a hazard
+            for (float i : hazardOdds) {
+                totalOdds += i;
+                // if the total is greater than the generated number, we have our answer!
+                if (totalOdds > num)
+                    break;
+
+                toSpawn++;
+            }
+
+            if (toSpawn == 1 && !Global.hasMeteors) toSpawn = 0;
+
+            // spawn desired hazard
+            switch (toSpawn)
+            {
+                // spawn asteroid
+                case 0:
+                    obj = new FallingAsteroid(sprite_asteroid, -1, 5, randy.nextFloat() * 5 + 15, x);
+                    break;
+                // spawn meteor
+                case 1:
+                    obj = new FallingAsteroid(sprite_meteor, -1, 5, randy.nextFloat() * 5 + 30, x);
+                    break;
+            }
+        }
+        // spawn a powerup
+        else if (toSpawn == 1)
+        {
+            // first, chose a random object type based on odds array
+            num = randy.nextFloat();
+            toSpawn = 0;
+            totalOdds = 0f;
+
+            // pick a powerup
+            for (float i : powerOdds) {
+                totalOdds += i;
+                // if the total is greater than the generated number, we have our answer!
+                if (totalOdds > num)
+                    break;
+
+                toSpawn++;
+            }
+
+            if (toSpawn == 1 && !Global.hasBomb) toSpawn = 1;
+
+            // spawn desired powerup
+            switch (toSpawn)
+            {
+                // spawn asteroid
+                case 0:
+                    obj = new FallingFuelBonus(sprite_fuel, -1, 5, randy.nextFloat() * 5 + 20, x, 25f);
+                    break;
+                // spawn meteor
+                case 1:
+                    obj = new FallingHealthBonus(sprite_heart, -1, 5, randy.nextFloat() * 5 + 20, x);
+                    break;
+                // spawn bomb
+                case 2:
+                    obj = new FallingBomb(sprite_bomb, -1, 5, randy.nextFloat() * 5 + 20, x);
+            }
+        }
+        
+        return obj;
     }
 
     public void draw() {
@@ -164,7 +232,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             objects.add(generateRandomObject(-400, 400));
 
             // reset timer by random amount
-            timeUntilNextObject = randy.nextFloat() * 0.5f + 0.5f;
+            timeUntilNextObject = randy.nextFloat() * 0.5f + 1f;
         }
 
         c.drawBitmap(sprite_starBackground, 0, 0, null);
