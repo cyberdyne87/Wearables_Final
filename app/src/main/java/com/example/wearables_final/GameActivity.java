@@ -41,6 +41,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
     // time tracking
     long previousTime = -1;
+    float timeUntilNextObject = 0f;
 
     // game variables
     Rocketship rocket;
@@ -49,9 +50,23 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     int lives = 0; // how many hits can the player take?
     float score = 0f; // how far has the player gotten in km?
     float fuelRemaining = 100f; // how much fuel does the player have left?
+    float fuelDrainRate = 5f; // how much fuel is consumed per second?
+    float boost = 100f; // when this is equal to 100, the boost is ready
+    float boostFillSpeed; // how quickly the boost meter should be filled
+
+    // generation odds
+    float[] objectTypeOdds = new float[]{0.7f, 0.3f}; // 0 = hazard, 1 = "power" up
+    float[] hazardOdds = new float[]{0.8f, 0.2f}; // 0 = asteroid, 1 = meteor (if enabled)
+    float[] powerOdds = new float[]{0.5f, 0.4f, 0.1f}; // 0 = fuel, 1 = heart, 2 = bomb (if enabled)
 
     // game objects
-    // ArrayList<> objects = new ArrayList<>(); // falling objects currently in play
+    ArrayList<FallingObject> objects = new ArrayList<>(); // falling objects currently in play
+
+    // sprite variables
+    Bitmap sprite_asteroid;
+    Bitmap sprite_meteor;
+    Bitmap sprite_mine;
+    Bitmap sprite_rocket;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +89,34 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
         // set up rocket
         // rocket = new Rocketship(SPRITE_HERE, 100, 100, 0, 0, 4);
+
+        // bitmap
+        sprite_asteroid = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.AsteroidBig), 256, 256, false);
+        sprite_meteor = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.AsteroidLittle), 128, 128, false);
+        sprite_mine = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.Mine), 128, 128, false);
+        sprite_rocket = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.RocketShip), 256, 256, false);
+    }
+
+    // generates a random candy that falls down the screen
+    public FallingObject generateRandomObject(float minX, float maxX) {
+        // first, chose a random object type based on odds array
+        float num = randy.nextFloat();
+        int toSpawn = 0;
+        float totalOdds = 0f;
+
+        // pick hazard or powerup
+        for (float i : objectTypeOdds)
+        {
+            totalOdds += i;
+            // if the total is greater than the generated number, we have our answer!
+            if (totalOdds > num)
+                break;
+
+            toSpawn++;
+        }
+
+        // temporary
+        return new FallingObject(sprite_asteroid, -1, 0f, 0f, 0, 0f);
     }
 
     public void draw() {
@@ -87,6 +130,30 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         float timeElapsed = 0f;
         if (previousTime != -1 && canPlay) timeElapsed = SystemClock.elapsedRealtime() / 1000f - previousTime / 1000f;
         previousTime = SystemClock.elapsedRealtime();
+
+        // drain fuel
+        if (fuelRemaining > 0f) fuelRemaining -= timeElapsed * fuelDrainRate;
+        if (fuelRemaining < 0f) {
+            fuelRemaining = 0f;
+            canPlay = false;
+        }
+
+        // gain boost
+        if (boost <= 0f) boost += timeElapsed * boostFillSpeed;
+        if (boost > 100f) {
+            boost = 100f;
+        }
+
+        // tick down next object spawn time
+        timeUntilNextObject -= timeElapsed;
+        if (timeUntilNextObject < 0)
+        {
+            // spawn a new object if it's time!
+            // objects.add(generateRandomObject(-c.getWidth() / 2f + 100f, c.getWidth() / 2f - 100f));
+
+            // reset timer by random amount
+            timeUntilNextObject = randy.nextFloat() * 0.5f + 0.5f;
+        }
 
         // stop drawing
         holder.unlockCanvasAndPost(c);
@@ -108,6 +175,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
     // plays a sound with a fresh media player that closes itself when complete
     public void playSound(int sound) {
+        if (sound == -1) return;
         MediaPlayer player;
         player = MediaPlayer.create(getBaseContext(), sound);
         player.start();
