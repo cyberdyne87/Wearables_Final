@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     //Ivy's code
-        Button game = (Button) findViewById(R.id.playButton);
+        Button lunarlander = (Button) findViewById(R.id.startgameButton);
         Button manual = (Button) findViewById(R.id.manualButton);
         Button trophies = (Button) findViewById(R.id.trophyButton);
         Button credits = (Button) findViewById(R.id.creditsButton);
@@ -47,10 +47,10 @@ public class MainActivity extends AppCompatActivity {
         player.start();
 
 
-        game.setOnClickListener(new View.OnClickListener() {
+        lunarlander.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, GameActivity.class);
+                Intent intent = new Intent(MainActivity.this, LunarLander.class);
                 startActivity(intent);
             }
         });
