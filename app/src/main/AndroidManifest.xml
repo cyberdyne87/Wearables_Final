@@ -13,6 +13,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CandyCatcher">
         <activity
+            android:name=".ConstellationDiscoverer"
+            android:exported="true" />
+        <activity
+            android:name=".SpaceExplorer"
+            android:exported="true" />
+        <activity
+            android:name=".FinalFrontier"
+            android:exported="true" />
+        <activity
+            android:name=".EventHorizon"
+            android:exported="true" />
+        <activity
+            android:name=".DodgeAndWeave"
+            android:exported="true" />
+        <activity
+            android:name=".LunarLander"
+            android:exported="true" />
+        <activity
             android:name=".Trophy"
             android:exported="true" />
         <activity
