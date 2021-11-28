@@ -175,7 +175,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
                 toSpawn++;
             }
 
-            if (toSpawn == 1 && !Global.hasBomb) toSpawn = 1;
+            if (toSpawn == 2 && !Global.hasBomb) toSpawn = 1;
 
             // spawn desired powerup
             switch (toSpawn)
