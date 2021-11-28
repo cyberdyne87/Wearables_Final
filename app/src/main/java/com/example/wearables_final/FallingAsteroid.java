@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 public class FallingAsteroid extends FallingObject {
 
     public FallingAsteroid(Bitmap image, int catchSound, float rotationSpeed, float fallSpeed, float x) {
-        super(image, catchSound, rotationSpeed, fallSpeed, 0, x);
+        super(image, catchSound, rotationSpeed, fallSpeed, x);
     }
 
     @Override

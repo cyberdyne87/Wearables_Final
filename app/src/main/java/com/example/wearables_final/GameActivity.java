@@ -47,7 +47,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     Rocketship rocket;
     Random randy;
     boolean canPlay = true;
-    int lives = 0; // how many hits can the player take?
+    int lives = 3; // how many hits can the player take?
     float score = 0f; // how far has the player gotten in km?
     float fuelRemaining = 100f; // how much fuel does the player have left?
     float fuelDrainRate = 5f; // how much fuel is consumed per second?
@@ -66,7 +66,10 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     Bitmap sprite_asteroid;
     Bitmap sprite_meteor;
     Bitmap sprite_bomb;
+    Bitmap sprite_heart;
+    Bitmap sprite_fuel;
     Bitmap sprite_rocket;
+    Bitmap sprite_starBackground;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,17 +90,20 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         // set up randomness
         randy = new Random();
 
-        // set up rocket
-        rocket = new Rocketship(sprite_rocket, 100, 100, 0, 0, 4);
-
-        // bitmap
+        // bitmaps
         sprite_asteroid = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.asteroid), 256, 256, false);
         sprite_meteor = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.meteor), 128, 128, false);
         sprite_bomb = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.bomb), 128, 128, false);
+        sprite_heart = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.heart), 128, 128, false);
+        sprite_fuel = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.fuel), 128, 128, false);
         sprite_rocket = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.rocket), 256, 256, false);
+        sprite_starBackground = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.starsbackground_vtwo), 1080, 1920, false);
+
+        // set up rocket
+        rocket = new Rocketship(sprite_rocket, 100, 100, 0, 0, 4);
     }
 
-    // generates a random candy that falls down the screen
+    // generates a random obj that falls down the screen
     public FallingObject generateRandomObject(float minX, float maxX) {
         // first, chose a random object type based on odds array
         float num = randy.nextFloat();
@@ -115,8 +121,12 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             toSpawn++;
         }
 
+        // randomize x pos
+        float x = randy.nextFloat() * (maxX - minX) + minX;
+        float speed = (int)(randy.nextFloat() * 5) + 30f;
+
         // temporary
-        return new FallingObject(sprite_asteroid, -1, 0f, 0f, 0, 0f);
+        return new FallingAsteroid(sprite_asteroid, -1, 5f, speed, x);
     }
 
     public void draw() {
@@ -125,6 +135,8 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
         // start drawing
         Canvas c = holder.lockCanvas();
+
+        c.drawColor(Color.BLACK);
 
         // find time elapsed since last draw call
         float timeElapsed = 0f;
@@ -149,15 +161,47 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         if (timeUntilNextObject < 0)
         {
             // spawn a new object if it's time!
-            objects.add(generateRandomObject(-c.getWidth() / 2f + 100f, c.getWidth() / 2f - 100f));
+            objects.add(generateRandomObject(-400, 400));
 
             // reset timer by random amount
             timeUntilNextObject = randy.nextFloat() * 0.5f + 0.5f;
         }
 
+        c.drawBitmap(sprite_starBackground, 0, 0, null);
+
+        // update and draw falling candies
+        ListIterator<FallingObject> iterator = objects.listIterator();
+        while (iterator.hasNext()){
+            // get this obj
+            FallingObject obj = iterator.next();
+
+            // update this obj's position (if in play)
+            if (canPlay) obj.update();
+
+            // collision checking with bowl
+            if (rocketTouchCheck(obj)) {
+                obj.consequences(this);
+                playSound(obj.collisionSound);
+                iterator.remove();
+            }
+
+            // check if this obj has passed the bottom of the screen
+            if (obj.yPos > c.getHeight()) iterator.remove();
+
+            obj.draw(c);
+        }
+
+        for (FallingObject drawn : objects)
+            drawn.draw(c);
+
         // update rocket
-        rocket.update(accel_x, accel_y, 0, c.getWidth(), 0, c.getHeight(), 128);
+        rocket.update(accel_x, accel_y, -600, 600, -900, 900, 160);
         rocket.draw(c);
+
+        // draw ui
+        for (int i = 0; i < lives; i++) {
+            c.drawBitmap(sprite_heart, 20 + i * 120, 20, null);
+        }
 
         // stop drawing
         holder.unlockCanvasAndPost(c);
@@ -169,7 +213,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
         float xDist = Math.abs(rocket.xPos - obj.xPos);
         float yDist = Math.abs(rocket.yPos - obj.yPos);
-        if (xDist < rocket.width && yDist < rocket.height) {
+        if (xDist < rocket.width + obj.sprite.getWidth() / 3 && yDist < rocket.height + obj.sprite.getHeight() / 3) {
             return true;
         }
         else {
@@ -216,14 +260,15 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         accel_x = sensorEvent.values[0];
-        accel_y = sensorEvent.values[1];
+        accel_y = sensorEvent.values[2];
         if (!canPlay)
         {
             accel_x = 0f;
             accel_y = 0f;
         }
 
-        // Log.d("Testing", "X VAL: " + accel_x);
+        Log.d("Testing", "X VAL: " + accel_x);
+        Log.d("Testing", "Y VAL: " + accel_y);
     }
 
     @Override
