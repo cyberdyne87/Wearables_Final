@@ -4,15 +4,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/start_screen"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+    <Button
+        android:id="@+id/playButton"
+        android:layout_width="146dp"
+        android:layout_height="48dp"
+        android:text="Play"
+        app:layout_constraintBottom_toTopOf="@+id/manualButton"
+        app:layout_constraintEnd_toEndOf="@+id/manualButton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/manualButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.958" />
+
+    <ImageButton
+        android:id="@+id/buttonMusic"
+        android:layout_width="40dp"
+        android:layout_height="39dp"
+        android:background="#00FFFFFF"
+        android:onClick="onMusicPressed"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.040"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.020"
+        app:srcCompat="@android:drawable/ic_lock_silent_mode_off" />
+
+    <Button
+        android:id="@+id/manualButton"
+        android:layout_width="146dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="20dp"
+        android:text="Manual"
+        app:layout_constraintBottom_toTopOf="@+id/trophyButton"
+        app:layout_constraintEnd_toEndOf="@+id/trophyButton"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="@+id/trophyButton" />
+
+    <Button
+        android:id="@+id/trophyButton"
+        android:layout_width="146dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="20dp"
+        android:text="Trophies"
+        app:layout_constraintBottom_toTopOf="@+id/creditsButton"
+        app:layout_constraintEnd_toEndOf="@+id/creditsButton"
+        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintStart_toStartOf="@+id/creditsButton" />
+
+    <Button
+        android:id="@+id/creditsButton"
+        android:layout_width="148dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="44dp"
+        android:text="Credits"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
