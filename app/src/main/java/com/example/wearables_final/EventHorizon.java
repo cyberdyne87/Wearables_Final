@@ -16,7 +16,7 @@ public class EventHorizon extends AppCompatActivity {
         if(extras!=null){
 
 
-            ImageView frame=findViewById(R.id.eventhorizongps);
+            ImageView frame=findViewById(R.id.eventHorizon);
             frame.setImageResource(extras.getInt("pictureID"));
         }
     }

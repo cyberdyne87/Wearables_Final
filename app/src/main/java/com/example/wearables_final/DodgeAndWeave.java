@@ -16,7 +16,7 @@ public class DodgeAndWeave extends AppCompatActivity {
         if(extras!=null){
 
 
-            ImageView frame=findViewById(R.id.dogeweavegps);
+            ImageView frame=findViewById(R.id.dodgeAndWeave);
             frame.setImageResource(extras.getInt("pictureID"));
         }
     }

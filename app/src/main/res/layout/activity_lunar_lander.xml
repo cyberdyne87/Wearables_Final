@@ -8,7 +8,7 @@
     tools:context=".LunarLander">
 
     <ImageView
-        android:id="@+id/lunarlandergps"
+        android:id="@+id/lunarLander"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -16,7 +16,7 @@ public class SpaceExplorer extends AppCompatActivity {
         if(extras!=null){
 
 
-            ImageView frame=findViewById(R.id.spaceexplorergps);
+            ImageView frame=findViewById(R.id.spaceExplorer);
             frame.setImageResource(extras.getInt("pictureID"));
         }
     }

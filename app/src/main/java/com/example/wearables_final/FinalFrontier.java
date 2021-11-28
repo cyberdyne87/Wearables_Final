@@ -16,7 +16,7 @@ public class FinalFrontier extends AppCompatActivity {
         if(extras!=null){
 
 
-            ImageView frame=findViewById(R.id.finalfronteirgps);
+            ImageView frame=findViewById(R.id.finalFrontier);
             frame.setImageResource(extras.getInt("pictureID"));
         }
     }

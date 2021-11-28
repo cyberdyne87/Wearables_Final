@@ -16,7 +16,7 @@ public class ConstellationDiscoverer extends AppCompatActivity {
         if(extras!=null){
 
 
-            ImageView frame=findViewById(R.id.constellationgps);
+            ImageView frame=findViewById(R.id.constellationDiscoverer);
             frame.setImageResource(extras.getInt("pictureID"));
         }
     }

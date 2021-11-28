@@ -16,7 +16,7 @@ public class LunarLander extends AppCompatActivity {
         if(extras!=null){
 
 
-            ImageView frame=findViewById(R.id.lunarlandergps);
+            ImageView frame=findViewById(R.id.lunarLander);
             frame.setImageResource(extras.getInt("pictureID"));
         }
     }
