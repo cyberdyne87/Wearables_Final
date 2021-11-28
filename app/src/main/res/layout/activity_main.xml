@@ -8,10 +8,10 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/playButton"
+        android:id="@+id/startgameButton"
         android:layout_width="146dp"
         android:layout_height="48dp"
-        android:text="Play"
+        android:text="Lift Off"
         app:layout_constraintBottom_toTopOf="@+id/manualButton"
         app:layout_constraintEnd_toEndOf="@+id/manualButton"
         app:layout_constraintHorizontal_bias="1.0"
