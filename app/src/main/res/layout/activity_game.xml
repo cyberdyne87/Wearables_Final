@@ -70,35 +70,4 @@
         app:layout_constraintVertical_bias="0.023"
         app:srcCompat="@drawable/heart" />
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="87dp"
-        android:layout_height="119dp"
-        app:srcCompat="@drawable/asteroidbig"
-        tools:layout_editor_absoluteX="101dp"
-        tools:layout_editor_absoluteY="123dp" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="87dp"
-        android:layout_height="119dp"
-        app:srcCompat="@drawable/fuel"
-        tools:layout_editor_absoluteX="262dp"
-        tools:layout_editor_absoluteY="209dp" />
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="87dp"
-        android:layout_height="119dp"
-        app:srcCompat="@drawable/asteroidlittle"
-        tools:layout_editor_absoluteX="162dp"
-        tools:layout_editor_absoluteY="321dp" />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="87dp"
-        android:layout_height="119dp"
-        app:srcCompat="@drawable/rocketship"
-        tools:layout_editor_absoluteX="101dp"
-        tools:layout_editor_absoluteY="466dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
