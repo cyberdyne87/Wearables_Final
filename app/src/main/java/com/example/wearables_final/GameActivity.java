@@ -71,6 +71,10 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     Bitmap sprite_rocket;
     Bitmap sprite_starBackground;
 
+    // paints
+    Paint paint_fuel;
+    Paint paint_gameOver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,12 +96,23 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
         // bitmaps
         sprite_asteroid = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.asteroid), 256, 256, false);
-        sprite_meteor = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.meteor), 128, 128, false);
+        sprite_meteor = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.meteor), 196, 196, false);
         sprite_bomb = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.bomb), 128, 128, false);
         sprite_heart = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.heart), 128, 128, false);
         sprite_fuel = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.fuel), 128, 128, false);
         sprite_rocket = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.rocket), 256, 256, false);
         sprite_starBackground = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.starsbackground_vtwo), 1080, 1920, false);
+
+        // set up paints
+        paint_fuel = new Paint();
+        paint_fuel.setTextAlign(Paint.Align.RIGHT);
+        paint_fuel.setColor(Color.WHITE);
+        paint_fuel.setTextSize(80f);
+
+        paint_gameOver = new Paint();
+        paint_gameOver.setTextAlign(Paint.Align.CENTER);
+        paint_gameOver.setColor(Color.WHITE);
+        paint_gameOver.setTextSize(175f);
 
         // set up rocket
         rocket = new Rocketship(sprite_rocket, 100, 100, 0, 400, 4);
@@ -271,6 +286,13 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         for (int i = 0; i < lives; i++) {
             c.drawBitmap(sprite_heart, 20 + i * 120, 20, null);
         }
+
+        // draw temporary fuel meter
+        c.drawBitmap(sprite_fuel, c.getWidth() - 250, 20, null);
+        c.drawText(String.valueOf((int)fuelRemaining), c.getWidth() - 20, 120, paint_fuel);
+
+        // game over text
+        if (!canPlay) c.drawText("GAME OVER", c.getWidth() / 2f, c.getHeight() / 2f, paint_gameOver);
 
         // stop drawing
         holder.unlockCanvasAndPost(c);
