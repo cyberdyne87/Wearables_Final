@@ -29,7 +29,7 @@ public class SpaceExplorer extends AppCompatActivity {
         trophies.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SpaceExplorer.this, Trophy.class);
+                Intent intent = new Intent(SpaceExplorer.this, SpaceExplorerTrophyRoom.class);
                 startActivity(intent);
             }
         });

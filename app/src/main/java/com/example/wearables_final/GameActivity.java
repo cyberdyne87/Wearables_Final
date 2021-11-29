@@ -235,7 +235,8 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             timeUntilNextObject = randy.nextFloat() * 0.5f + 1f;
         }
 
-        c.drawBitmap(sprite_starBackground, 0, 0, null);
+        c.drawBitmap(sprite_starBackground, 0, 0,null);
+
 
         // update and draw falling candies
         ListIterator<FallingObject> iterator = objects.listIterator();

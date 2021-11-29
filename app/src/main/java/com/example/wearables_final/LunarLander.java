@@ -30,7 +30,7 @@ public class LunarLander extends AppCompatActivity {
         trophies.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LunarLander.this, Trophy.class);
+                Intent intent = new Intent(LunarLander.this, LunarLanderTrophyRoom.class);
                 startActivity(intent);
             }
         });
