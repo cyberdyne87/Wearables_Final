@@ -7,6 +7,18 @@
     android:background="@drawable/trophyroom_graybadges_color_finalfrontier"
     tools:context=".FinalFrontierTrophyRoom">
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="411dp"
+        android:layout_height="105dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/newbadgetxt" />
+
     <TextView
         android:id="@+id/trophy3"
         android:layout_width="wrap_content"

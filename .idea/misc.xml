@@ -4,8 +4,6 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Dylan/AndroidStudioProjects/Wearables_Final/app/src/main/res/layout/activity_main.xml" value="0.26927083333333335" />
-        <entry key="..\:/Users/Ethan/AndroidStudioProjects/wearablefinal/app/src/main/res/layout/activity_credits.xml" value="0.15806159420289856" />
-        <entry key="..\:/Users/Ethan/AndroidStudioProjects/wearablefinal/app/src/main/res/layout/activity_lunar_lander.xml" value="0.15806159420289856" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.5411458333333333" />
         <entry key="app/src/main/res/drawable/ic_launcher_logo_background.xml" value="0.5411458333333333" />
         <entry key="app/src/main/res/layout/activity_constellation_discoverer.xml" value="0.4302536231884058" />
@@ -14,13 +12,13 @@
         <entry key="app/src/main/res/layout/activity_dodge_and_weave.xml" value="0.4302536231884058" />
         <entry key="app/src/main/res/layout/activity_dodge_and_weave_trophy_room.xml" value="0.48385416666666664" />
         <entry key="app/src/main/res/layout/activity_event_horizon.xml" value="0.4302536231884058" />
-        <entry key="app/src/main/res/layout/activity_event_horizon_trophy_room.xml" value="0.4979166666666667" />
+        <entry key="app/src/main/res/layout/activity_event_horizon_trophy_room.xml" value="0.45" />
         <entry key="app/src/main/res/layout/activity_final_frontier.xml" value="0.4302536231884058" />
-        <entry key="app/src/main/res/layout/activity_final_frontier_trophy_room.xml" value="0.4963768115942029" />
+        <entry key="app/src/main/res/layout/activity_final_frontier_trophy_room.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_game.xml" value="0.4384057971014493" />
         <entry key="app/src/main/res/layout/activity_gpsactivity.xml" value="0.31145833333333334" />
         <entry key="app/src/main/res/layout/activity_lunar_lander.xml" value="0.4302536231884058" />
-        <entry key="app/src/main/res/layout/activity_lunar_lander_trophy_room.xml" value="0.4979166666666667" />
+        <entry key="app/src/main/res/layout/activity_lunar_lander_trophy_room.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_manual.xml" value="0.45" />
         <entry key="app/src/main/res/layout/activity_space_explorer.xml" value="0.4302536231884058" />
