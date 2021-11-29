@@ -36,15 +36,29 @@ public class GPSActivity extends AppCompatActivity implements LocationListener  
         setContentView(R.layout.activity_gpsactivity);
 
         lunarLander = new Location(LocationManager.GPS_PROVIDER);
-        //lunarLander.setLongitude(); need to be set in the future
-        //lunarLander.setLatitude(); wont include in the rest of the location initializations
+        lunarLander.setLongitude(-104.008264); //need to be set in the future
+        lunarLander.setLatitude(43.9463683); //wont include in the rest of the location initializations
 
         //will need to set the longitude and latitude on these once we have them
         spaceExplorer = new Location(LocationManager.GPS_PROVIDER);
+        spaceExplorer.setLongitude(-80.694108); //need to be set in the future
+        spaceExplorer.setLatitude(28.6144578); //wont include in the rest of the location initializations
+
         constellationDiscoverer = new Location(LocationManager.GPS_PROVIDER);
+        constellationDiscoverer.setLongitude(23.4659497); //need to be set in the future
+        constellationDiscoverer.setLatitude(37.346624); //wont include in the rest of the location initializations
+
         eventHorizon = new Location(LocationManager.GPS_PROVIDER);
+        eventHorizon.setLongitude(-155.576466); //need to be set in the future
+        eventHorizon.setLatitude(19.5363584 ); //wont include in the rest of the location initializations
+
         dodgeAndWeave = new Location(LocationManager.GPS_PROVIDER);
+        dodgeAndWeave.setLongitude(-69.2305127); //need to be set in the future
+        dodgeAndWeave.setLatitude(45.184117); //wont include in the rest of the location initializations
+
         finalFrontier = new Location(LocationManager.GPS_PROVIDER);
+        finalFrontier.setLongitude(147.6739576); //need to be set in the future
+        finalFrontier.setLatitude(63.5429608); //wont include in the rest of the location initializations
 
         boolean permissionGranted = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
 
