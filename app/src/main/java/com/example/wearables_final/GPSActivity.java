@@ -38,29 +38,29 @@ public class GPSActivity extends AppCompatActivity implements LocationListener  
 // I ADDED THE CORDS BUT WE NEED TO FIX THE DISTANCE SO THEY ACTIVATE! -IVY
 
         lunarLander = new Location(LocationManager.GPS_PROVIDER);
-        lunarLander.setLongitude(-104.008264); //need to be set in the future
-        lunarLander.setLatitude(43.9463683); //wont include in the rest of the location initializations
+        lunarLander.setLongitude(-104.008264);
+        lunarLander.setLatitude(43.9463683); //Moon, South Dakota
 
-        //will need to set the longitude and latitude on these once we have them
+
         spaceExplorer = new Location(LocationManager.GPS_PROVIDER);
-        spaceExplorer.setLongitude(-80.694108); //need to be set in the future
-        spaceExplorer.setLatitude(28.6144578); //wont include in the rest of the location initializations
+        spaceExplorer.setLongitude(-80.694108);
+        spaceExplorer.setLatitude(28.6144578); //Nasa
 
         constellationDiscoverer = new Location(LocationManager.GPS_PROVIDER);
-        constellationDiscoverer.setLongitude(23.4659497); //need to be set in the future
-        constellationDiscoverer.setLatitude(37.346624); //wont include in the rest of the location initializations
+        constellationDiscoverer.setLongitude(23.4659497);
+        constellationDiscoverer.setLatitude(37.346624); //Hydra Greece
 
         eventHorizon = new Location(LocationManager.GPS_PROVIDER);
-        eventHorizon.setLongitude(-155.576466); //need to be set in the future
-        eventHorizon.setLatitude(19.5363584 ); //wont include in the rest of the location initializations
+        eventHorizon.setLongitude(-155.576466);
+        eventHorizon.setLatitude(19.5363584 ); //Mauna Loa Observatory
 
         dodgeAndWeave = new Location(LocationManager.GPS_PROVIDER);
-        dodgeAndWeave.setLongitude(-69.2305127); //need to be set in the future
-        dodgeAndWeave.setLatitude(45.184117); //wont include in the rest of the location initializations
+        dodgeAndWeave.setLongitude(-69.2305127);
+        dodgeAndWeave.setLatitude(-69.2305127); //weaving mill
 
         finalFrontier = new Location(LocationManager.GPS_PROVIDER);
-        finalFrontier.setLongitude(147.6739576); //need to be set in the future
-        finalFrontier.setLatitude(63.5429608); //wont include in the rest of the location initializations
+        finalFrontier.setLongitude(-147.6739576);
+        finalFrontier.setLatitude(63.5429608); //Alaska
 
         boolean permissionGranted = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
 
@@ -116,36 +116,36 @@ public class GPSActivity extends AppCompatActivity implements LocationListener  
     {
         Log.d("GPS_Logs", "New location recieved. Long: "+location.getLongitude()+" Lat: "+location.getLatitude());
 
-        if (location.distanceTo(lunarLander) < 50)
+        if (location.distanceTo(lunarLander) < 500)
         {
             Log.d("GPS_Logs", "You are at lunarLander site");
             //starting point? irrelevant if there is no order to the gps locations
             //functionality for gps location here
 
         }
-        else if (location.distanceTo(spaceExplorer) < 50)
+        else if (location.distanceTo(spaceExplorer) < 500)
         {
             Log.d("GPS_Logs", "You are at spaceExplorer site");
             //functionality for gps location here
 
         }
-        else if (location.distanceTo(constellationDiscoverer) < 50)
+        else if (location.distanceTo(constellationDiscoverer) < 500)
         {
             Log.d("GPS_Logs", "You are at constellationDiscoverer site");
             //functionality for gps location here
         }
-        else if (location.distanceTo(eventHorizon) < 50)
+        else if (location.distanceTo(eventHorizon) < 500)
         {
             Log.d("GPS_Logs", "You are at eventHorizon site");
             //functionality for gps location here
         }
-        else if (location.distanceTo(dodgeAndWeave) < 50)
+        else if (location.distanceTo(dodgeAndWeave) < 500)
         {
             Log.d("GPS_Logs", "You are at dodgeAndWeave site");
             //functionality for gps location here
 
         }
-        else if (location.distanceTo(finalFrontier) < 50)
+        else if (location.distanceTo(finalFrontier) < 500)
         {
             Log.d("GPS_Logs", "You are at finalFrontier site");
             //functionality for gps location here
