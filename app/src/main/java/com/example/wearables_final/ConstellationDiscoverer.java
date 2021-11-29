@@ -29,7 +29,7 @@ public class ConstellationDiscoverer extends AppCompatActivity {
         trophies.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ConstellationDiscoverer.this, Trophy.class);
+                Intent intent = new Intent(ConstellationDiscoverer.this, ConstillationDiscovererTrophyRoom.class);
                 startActivity(intent);
             }
         });

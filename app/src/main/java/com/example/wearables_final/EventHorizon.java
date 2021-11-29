@@ -29,7 +29,7 @@ public class EventHorizon extends AppCompatActivity {
         trophies.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(EventHorizon.this, Trophy.class);
+                Intent intent = new Intent(EventHorizon.this, EventHorizonTrophyRoom.class);
                 startActivity(intent);
             }
         });

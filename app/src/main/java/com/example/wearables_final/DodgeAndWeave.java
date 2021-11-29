@@ -30,7 +30,7 @@ public class DodgeAndWeave extends AppCompatActivity {
         trophies.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(DodgeAndWeave.this, Trophy.class);
+                Intent intent = new Intent(DodgeAndWeave.this, DodgeAndWeaveTrophyRoom.class);
                 startActivity(intent);
             }
         });

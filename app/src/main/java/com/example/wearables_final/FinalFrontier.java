@@ -29,7 +29,7 @@ public class FinalFrontier extends AppCompatActivity {
         trophies.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(FinalFrontier.this, Trophy.class);
+                Intent intent = new Intent(FinalFrontier.this, FinalFrontierTrophyRoom.class);
                 startActivity(intent);
             }
         });
