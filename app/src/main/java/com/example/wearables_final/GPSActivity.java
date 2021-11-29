@@ -35,6 +35,8 @@ public class GPSActivity extends AppCompatActivity implements LocationListener  
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gpsactivity);
 
+// I ADDED THE CORDS BUT WE NEED TO FIX THE DISTANCE SO THEY ACTIVATE! -IVY
+
         lunarLander = new Location(LocationManager.GPS_PROVIDER);
         lunarLander.setLongitude(-104.008264); //need to be set in the future
         lunarLander.setLatitude(43.9463683); //wont include in the rest of the location initializations
