@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Dylan/AndroidStudioProjects/Wearables_Final/app/src/main/res/layout/activity_main.xml" value="0.26927083333333335" />
+        <entry key="..\:/Users/Ethan/AndroidStudioProjects/wearablefinal/app/src/main/res/layout/activity_credits.xml" value="0.15806159420289856" />
+        <entry key="..\:/Users/Ethan/AndroidStudioProjects/wearablefinal/app/src/main/res/layout/activity_lunar_lander.xml" value="0.15806159420289856" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.5411458333333333" />
         <entry key="app/src/main/res/drawable/ic_launcher_logo_background.xml" value="0.5411458333333333" />
         <entry key="app/src/main/res/layout/activity_constellation_discoverer.xml" value="0.4302536231884058" />
