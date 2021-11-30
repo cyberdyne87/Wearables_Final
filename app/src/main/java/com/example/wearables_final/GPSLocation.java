@@ -65,7 +65,7 @@ public class GPSLocation extends Service
         dodgeAndWeave.setLatitude(45.1841174); //weaving mill
 
         finalFrontier = new Location(LocationManager.GPS_PROVIDER);
-        finalFrontier.setLongitude(-147.7476875);
+        finalFrontier.setLongitude(-141.7476875);
         finalFrontier.setLatitude(60.1648125); //Alaska
 
         boolean permissionGranted = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
