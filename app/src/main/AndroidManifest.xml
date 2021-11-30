@@ -12,6 +12,11 @@
         android:roundIcon="@drawable/ic_launcher_spacesuit_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CandyCatcher">
+        <service
+            android:name=".GPSLocation"
+            android:enabled="true"
+            android:exported="true"></service>
+
         <activity
             android:name=".FinalFrontierTrophyRoom"
             android:exported="true" />

@@ -1,7 +1,9 @@
 package com.example.wearables_final;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -15,7 +17,8 @@ public class MainActivity extends AppCompatActivity {
     //Ivy's code
     MediaPlayer player;
     boolean paused;
-    GPSActivity gpsListener;
+
+
 
     public static void setOnClickListener(View.OnClickListener onClickListener) {
     }
@@ -37,10 +40,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //cant request permissions within a service
+        //we do this here instead, once location services are granted we can start the service -- Dylan
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
 
-
-
-
+        //starting location service -- Dylan
+        Intent intent = new Intent(this, GPSLocation.class);
+        startService(intent);
 
     //Ivy's code
         Button lunarlander = (Button) findViewById(R.id.startgameButton);

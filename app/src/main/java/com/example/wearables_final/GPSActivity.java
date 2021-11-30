@@ -16,10 +16,11 @@ import android.util.Log;
 
 import java.util.concurrent.TimeUnit;
 
-// This is the GPS component of our app! It will transition to the game after reaching
-// a new location and adds a new feature to the game in the process!
+// This Class is no longer being used!! -- GPSLocation.java implements this via a service
 
 public class GPSActivity extends AppCompatActivity implements LocationListener  {
+
+   /*
 
     final int PERMISSION_REQUEST_CODE = 0;
 
@@ -111,9 +112,13 @@ public class GPSActivity extends AppCompatActivity implements LocationListener  
         }
     }
 
+    */
+
     @Override
     public void onLocationChanged(@NonNull Location location)
     {
+        /*
+
         Log.d("GPS_Logs", "New location recieved. Long: "+location.getLongitude()+" Lat: "+location.getLatitude());
 
         if (location.distanceTo(lunarLander) < 500)
@@ -152,6 +157,10 @@ public class GPSActivity extends AppCompatActivity implements LocationListener  
 
         }
 
+         */
+
 
     }
+
+
 }
