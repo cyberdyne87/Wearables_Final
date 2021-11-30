@@ -113,6 +113,7 @@ public class GPSLocation extends Service
     @Override
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
+        //wont need this ^^
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
