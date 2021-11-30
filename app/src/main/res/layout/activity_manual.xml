@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/manual_astroidgame"
+    android:background="@drawable/manual_page_words"
     tools:context=".Manual">
 
     <TextView
         android:id="@+id/manual"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="24dp"
+        android:layout_height="10dp"
         android:text="Manual"
         android:textColor="#212E99"
         app:layout_constraintBottom_toBottomOf="parent"

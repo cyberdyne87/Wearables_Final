@@ -3,7 +3,32 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Dylan/AndroidStudioProjects/Wearables_Final/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/Dylan/AndroidStudioProjects/Wearables_Final/app/src/main/res/layout/activity_main.xml" value="0.26927083333333335" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.5411458333333333" />
+        <entry key="app/src/main/res/drawable/ic_launcher_logo_background.xml" value="0.5411458333333333" />
+        <entry key="app/src/main/res/layout/activity_constellation_discoverer.xml" value="0.4302536231884058" />
+        <entry key="app/src/main/res/layout/activity_constillation_discoverer_trophy_room.xml" value="0.48385416666666664" />
+        <entry key="app/src/main/res/layout/activity_credits.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/activity_dodge_and_weave.xml" value="0.4302536231884058" />
+        <entry key="app/src/main/res/layout/activity_dodge_and_weave_trophy_room.xml" value="0.48385416666666664" />
+        <entry key="app/src/main/res/layout/activity_event_horizon.xml" value="0.4302536231884058" />
+        <entry key="app/src/main/res/layout/activity_event_horizon_trophy_room.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/activity_final_frontier.xml" value="0.4302536231884058" />
+        <entry key="app/src/main/res/layout/activity_final_frontier_trophy_room.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_game.xml" value="0.4384057971014493" />
+        <entry key="app/src/main/res/layout/activity_gpsactivity.xml" value="0.31145833333333334" />
+        <entry key="app/src/main/res/layout/activity_lunar_lander.xml" value="0.4302536231884058" />
+        <entry key="app/src/main/res/layout/activity_lunar_lander_trophy_room.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/activity_manual.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_space_explorer.xml" value="0.4302536231884058" />
+        <entry key="app/src/main/res/layout/activity_space_explorer_trophy_room.xml" value="0.48385416666666664" />
+        <entry key="app/src/main/res/layout/activity_trophy.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/credits.xml" value="0.31145833333333334" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.5411458333333333" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_logo.xml" value="0.32760416666666664" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_logo_round.xml" value="0.5411458333333333" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.5411458333333333" />
       </map>
     </option>
   </component>
