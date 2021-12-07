@@ -10,7 +10,6 @@ public class FallingBomb extends FallingObject {
 
     @Override
     public void consequences(GameActivity game) {
-        if (game.lives < 3)
-            game.lives++;
+        game.triggeredBomb = true;
     }
 }

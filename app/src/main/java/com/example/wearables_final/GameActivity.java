@@ -46,18 +46,21 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     // game variables
     Rocketship rocket;
     Random randy;
+    DrawnObject fuelStick;
     boolean canPlay = true;
     int lives = 3; // how many hits can the player take?
     float score = 0f; // how far has the player gotten in km?
     float fuelRemaining = 100f; // how much fuel does the player have left?
+    float maxFuel = 100f;
     float fuelDrainRate = 5f; // how much fuel is consumed per second?
     float boost = 100f; // when this is equal to 100, the boost is ready
     float boostFillSpeed; // how quickly the boost meter should be filled
+    public boolean triggeredBomb = false;
 
     // generation odds
     float[] objectTypeOdds = new float[]{0.85f, 0.15f}; // 0 = hazard, 1 = "power" up
     float[] hazardOdds = new float[]{0.8f, 0.2f}; // 0 = asteroid, 1 = meteor (if enabled)
-    float[] powerOdds = new float[]{0.5f, 0.4f, 0.1f}; // 0 = fuel, 1 = heart, 2 = bomb (if enabled)
+    float[] powerOdds = new float[]{0.1f, 0.1f, 0.8f}; // 0 = fuel, 1 = heart, 2 = bomb (if enabled)
 
     // game objects
     ArrayList<FallingObject> objects = new ArrayList<>(); // falling objects currently in play
@@ -70,6 +73,8 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     Bitmap sprite_fuel;
     Bitmap sprite_rocket;
     Bitmap sprite_starBackground;
+    Bitmap sprite_fuelgauge;
+    Bitmap sprite_fuelstick;
 
     // paints
     Paint paint_fuel;
@@ -102,6 +107,8 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         sprite_fuel = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.fuel), 128, 128, false);
         sprite_rocket = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.rocket), 256, 256, false);
         sprite_starBackground = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.starsbackground_vtwo), 1080, 1920, false);
+        sprite_fuelgauge = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.fuelgage), 256, 256, false);
+        sprite_fuelstick = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.fuelgagestick_adjusted), 480, 480, false);
 
         // set up paints
         paint_fuel = new Paint();
@@ -116,6 +123,8 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
         // set up rocket
         rocket = new Rocketship(sprite_rocket, 100, 100, 0, 400, 4);
+
+        fuelStick = new DrawnObject(sprite_fuelstick,0, 0, 0);
     }
 
     // generates a random obj that falls down the screen
@@ -212,6 +221,15 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         return obj;
     }
 
+    public void smartBomb()
+    {
+        // clear out hazards
+        objects.removeIf(obj -> obj instanceof FallingAsteroid || obj instanceof FallingMeteor);
+
+        // reset bomb
+        triggeredBomb = false;
+    }
+
     public void draw() {
         // double check to prevent crashes
         if (holder == null) return;
@@ -275,6 +293,10 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             obj.draw(c);
         }
 
+        // blow up smart bomb
+        if (triggeredBomb)
+            smartBomb();
+
         for (FallingObject drawn : objects)
             drawn.draw(c);
 
@@ -287,9 +309,19 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             c.drawBitmap(sprite_heart, 20 + i * 120, 20, null);
         }
 
+        // lives run out
+        if (lives <= 0) canPlay = false;
+
         // draw temporary fuel meter
-        c.drawBitmap(sprite_fuel, c.getWidth() - 250, 20, null);
-        c.drawText(String.valueOf((int)fuelRemaining), c.getWidth() - 20, 120, paint_fuel);
+        // c.drawBitmap(sprite_fuel, c.getWidth() - 250, 20, null);
+        // c.drawText(String.valueOf((int)fuelRemaining), c.getWidth() - 20, 120, paint_fuel);
+
+        // draw better fuel meter
+        c.drawBitmap(sprite_fuelgauge, c.getWidth() - 256, 0, null);
+        fuelStick.xPos = c.getWidth() / 2f - 16;
+        fuelStick.yPos = -(c.getHeight() / 2f) + 16;
+        fuelStick.angle = (-(1 - (fuelRemaining / maxFuel)) * 82) - 3;
+        fuelStick.draw(c);
 
         // game over text
         if (!canPlay) c.drawText("GAME OVER", c.getWidth() / 2f, c.getHeight() / 2f, paint_gameOver);
@@ -304,7 +336,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
         float xDist = Math.abs(rocket.xPos - obj.xPos);
         float yDist = Math.abs(rocket.yPos - obj.yPos);
-        if (xDist < rocket.width + obj.sprite.getWidth() / 3 && yDist < rocket.height + obj.sprite.getHeight() / 3) {
+        if (xDist < rocket.width + obj.sprite.getWidth() / 3f && yDist < rocket.height + obj.sprite.getHeight() / 3f) {
             return true;
         }
         else {
@@ -358,8 +390,8 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             accel_y = 0f;
         }
 
-        Log.d("Testing", "X VAL: " + accel_x);
-        Log.d("Testing", "Y VAL: " + accel_y);
+        // Log.d("Testing", "X VAL: " + accel_x);
+        // Log.d("Testing", "Y VAL: " + accel_y);
     }
 
     @Override
