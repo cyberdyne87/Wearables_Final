@@ -7,4 +7,6 @@ public class Global {
     public static boolean hasBomb = false;
     public static boolean hasBoost = false;
     public static float highScore = 0f;
+
+    public static int currentLocation = 0;
 }

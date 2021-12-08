@@ -172,36 +172,50 @@ public class GPSLocation extends Service
             if (location.distanceTo(lunarLander) < 50)
             {
                 Log.d("GPS_Logs", "You are at lunarLander site");
+
                 //starting point? irrelevant if there is no order to the gps locations
                 //functionality for gps location here
+                Global.currentLocation = 1;
+                //no game changes on first location
 
             }
             else if (location.distanceTo(spaceExplorer) < 50)
             {
                 Log.d("GPS_Logs", "You are at spaceExplorer site");
+
                 //functionality for gps location here
+                Global.currentLocation = 4;
+                Global.hasMeteors = true;
 
             }
             else if (location.distanceTo(constellationDiscoverer) < 50)
             {
                 Log.d("GPS_Logs", "You are at constellationDiscoverer site");
                 //functionality for gps location here
+                Global.currentLocation = 3;
+                //inc global speed
             }
             else if (location.distanceTo(eventHorizon) < 50)
             {
                 Log.d("GPS_Logs", "You are at eventHorizon site");
                 //functionality for gps location here
+                Global.currentLocation = 5;
+                Global.hasBomb = true;
             }
             else if (location.distanceTo(dodgeAndWeave) < 50)
             {
                 Log.d("GPS_Logs", "You are at dodgeAndWeave site");
                 //functionality for gps location here
+                Global.currentLocation = 2;
+                Global.hasBoost = true;
 
             }
             else if (location.distanceTo(finalFrontier) < 50)
             {
                 Log.d("GPS_Logs", "You are at finalFrontier site");
                 //functionality for gps location here
+                Global.currentLocation = 6;
+                //inc speed
 
             }
 
