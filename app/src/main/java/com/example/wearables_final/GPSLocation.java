@@ -194,6 +194,7 @@ public class GPSLocation extends Service
                 //functionality for gps location here
                 Global.currentLocation = 3;
                 //inc global speed
+                Global.speedUp += 0.25;
             }
             else if (location.distanceTo(eventHorizon) < 50)
             {
@@ -216,6 +217,7 @@ public class GPSLocation extends Service
                 //functionality for gps location here
                 Global.currentLocation = 6;
                 //inc speed
+                Global.speedUp += 0.25;
 
             }
 
