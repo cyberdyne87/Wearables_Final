@@ -135,7 +135,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         paint_score.setTextSize(35f);
 
         // set up rocket
-        rocket = new Rocketship(sprite_rocket, 100, 100, 0, 400, 4);
+        rocket = new Rocketship(sprite_rocket, 100, 100, 0, 400, 4 * Global.speedUp);
 
         fuelStick = new DrawnObject(sprite_fuelstick,0, 0, 0);
     }
@@ -186,11 +186,11 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             {
                 // spawn asteroid
                 case 0:
-                    obj = new FallingAsteroid(sprite_asteroid, R.raw.collisionmetallicclunk, 5, randy.nextFloat() * 5 + 15, x);
+                    obj = new FallingAsteroid(sprite_asteroid, R.raw.collisionmetallicclunk, 5, (randy.nextFloat() * 5 + 15) * Global.speedUp, x);
                     break;
                 // spawn meteor
                 case 1:
-                    obj = new FallingAsteroid(sprite_meteor, R.raw.collisionmetallicclunk, 5, randy.nextFloat() * 5 + 30, x);
+                    obj = new FallingAsteroid(sprite_meteor, R.raw.collisionmetallicclunk, 5, (randy.nextFloat() * 5 + 30) * Global.speedUp, x);
                     break;
             }
         }
@@ -219,15 +219,15 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             {
                 // spawn asteroid
                 case 0:
-                    obj = new FallingFuelBonus(sprite_fuel, R.raw.pickupfuel, 5, randy.nextFloat() * 5 + 20, x, 25f);
+                    obj = new FallingFuelBonus(sprite_fuel, R.raw.pickupfuel, 5, (randy.nextFloat() * 5 + 20) * Global.speedUp, x, 25f);
                     break;
                 // spawn meteor
                 case 1:
-                    obj = new FallingHealthBonus(sprite_heart, R.raw.health, 5, randy.nextFloat() * 5 + 20, x);
+                    obj = new FallingHealthBonus(sprite_heart, R.raw.health, 5, (randy.nextFloat() * 5 + 20) * Global.speedUp, x);
                     break;
                 // spawn bomb
                 case 2:
-                    obj = new FallingBomb(sprite_bomb, R.raw.spacenombexplosion, 5, randy.nextFloat() * 5 + 20, x);
+                    obj = new FallingBomb(sprite_bomb, R.raw.spacenombexplosion, 5, (randy.nextFloat() * 5 + 20) * Global.speedUp, x);
             }
         }
         
@@ -258,7 +258,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         previousTime = SystemClock.elapsedRealtime();
 
         // drain fuel
-        if (fuelRemaining > 0f) fuelRemaining -= timeElapsed * fuelDrainRate;
+        if (fuelRemaining > 0f) fuelRemaining -= timeElapsed * fuelDrainRate * Global.speedUp;
         if (fuelRemaining < 0f) {
             fuelRemaining = 0f;
             canPlay = false;
@@ -267,8 +267,8 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         // add score
         if (canPlay)
         {
-            score += scorePerSecond * timeElapsed;
-            if (isBoosting) score += scorePerSecond * timeElapsed * 3f;
+            score += scorePerSecond * timeElapsed * Global.speedUp;
+            if (isBoosting) score += scorePerSecond * timeElapsed * 3f * Global.speedUp;
         }
 
         // boosting
@@ -299,7 +299,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             objects.add(generateRandomObject(-400, 400));
 
             // reset timer by random amount
-            timeUntilNextObject = randy.nextFloat() * 0.5f + 1f;
+            timeUntilNextObject = (randy.nextFloat() * 0.5f + 1f) * Global.speedUp;
             if (isBoosting) timeUntilNextObject *= 0.5f;
         }
 
