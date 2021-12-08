@@ -4,6 +4,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -19,6 +20,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -29,7 +31,7 @@ import java.util.Random;
 
 // this activity contains the SurfaceViewGame!
 
-public class GameActivity extends AppCompatActivity implements SensorEventListener, SurfaceHolder.Callback {
+public class GameActivity extends AppCompatActivity implements SensorEventListener, SurfaceHolder.Callback, View.OnTouchListener {
 
     // core variables
     SensorManager manager;
@@ -50,12 +52,14 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     boolean canPlay = true;
     int lives = 3; // how many hits can the player take?
     float score = 0f; // how far has the player gotten in km?
+    float scorePerSecond = 10f;
     float fuelRemaining = 100f; // how much fuel does the player have left?
     float maxFuel = 100f;
     float fuelDrainRate = 5f; // how much fuel is consumed per second?
     float boost = 100f; // when this is equal to 100, the boost is ready
-    float boostFillSpeed; // how quickly the boost meter should be filled
+    float boostFillSpeed = 12.5f; // how quickly the boost meter should be filled
     public boolean triggeredBomb = false;
+    public boolean isBoosting = false;
 
     // generation odds
     float[] objectTypeOdds = new float[]{0.85f, 0.15f}; // 0 = hazard, 1 = "power" up
@@ -79,7 +83,9 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     // paints
     Paint paint_fuel;
     Paint paint_gameOver;
+    Paint paint_score;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +99,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         // set up surface view and animate it
         SurfaceView surface = findViewById(R.id.gameView);
         surface.getHolder().addCallback(this);
+        surface.setOnTouchListener(this);
         anim = new Animator(this);
         anim.start();
 
@@ -112,14 +119,20 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
         // set up paints
         paint_fuel = new Paint();
-        paint_fuel.setTextAlign(Paint.Align.RIGHT);
+        paint_fuel.setTextAlign(Paint.Align.CENTER);
         paint_fuel.setColor(Color.WHITE);
-        paint_fuel.setTextSize(80f);
+        paint_fuel.setFakeBoldText(true);
+        paint_fuel.setTextSize(60f);
 
         paint_gameOver = new Paint();
         paint_gameOver.setTextAlign(Paint.Align.CENTER);
         paint_gameOver.setColor(Color.WHITE);
         paint_gameOver.setTextSize(175f);
+
+        paint_score = new Paint();
+        paint_score.setTextAlign(Paint.Align.CENTER);
+        paint_score.setColor(Color.WHITE);
+        paint_score.setTextSize(35f);
 
         // set up rocket
         rocket = new Rocketship(sprite_rocket, 100, 100, 0, 400, 4);
@@ -251,10 +264,30 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             canPlay = false;
         }
 
-        // gain boost
-        if (boost <= 0f) boost += timeElapsed * boostFillSpeed;
-        if (boost > 100f) {
-            boost = 100f;
+        // add score
+        if (canPlay)
+        {
+            score += scorePerSecond * timeElapsed;
+            if (isBoosting) score += scorePerSecond * timeElapsed * 3f;
+        }
+
+        // boosting
+        if (Global.hasBoost) {
+            if (isBoosting) {
+                // lose boost
+                if (boost > 0f) boost -= timeElapsed * boostFillSpeed * 3f;
+                if (boost <= 0f) {
+                    boost = 0f;
+                    isBoosting = false;
+                }
+            }
+            else {
+                // gain boost
+                if (boost <= 100f) boost += timeElapsed * boostFillSpeed;
+                if (boost > 100f) {
+                    boost = 100f;
+                }
+            }
         }
 
         // tick down next object spawn time
@@ -266,6 +299,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
             // reset timer by random amount
             timeUntilNextObject = randy.nextFloat() * 0.5f + 1f;
+            if (isBoosting) timeUntilNextObject *= 0.5f;
         }
 
         c.drawBitmap(sprite_starBackground, 0, 0,null);
@@ -278,13 +312,18 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             FallingObject obj = iterator.next();
 
             // update this obj's position (if in play)
-            if (canPlay) obj.update();
+            if (canPlay)
+            {
+                obj.update();
+                // additional fallspeed when boosting
+                if (isBoosting) obj.yPos += obj.fallSpeed * 2f;
+            }
 
             // collision checking with bowl
             if (rocketTouchCheck(obj)) {
                 obj.consequences(this);
                 playSound(obj.collisionSound);
-                iterator.remove();
+                if (!isBoosting) iterator.remove();
             }
 
             // check if this obj has passed the bottom of the screen
@@ -312,10 +351,6 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         // lives run out
         if (lives <= 0) canPlay = false;
 
-        // draw temporary fuel meter
-        // c.drawBitmap(sprite_fuel, c.getWidth() - 250, 20, null);
-        // c.drawText(String.valueOf((int)fuelRemaining), c.getWidth() - 20, 120, paint_fuel);
-
         // draw better fuel meter
         c.drawBitmap(sprite_fuelgauge, c.getWidth() - 256, 0, null);
         fuelStick.xPos = c.getWidth() / 2f - 16;
@@ -325,6 +360,21 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
         // game over text
         if (!canPlay) c.drawText("GAME OVER", c.getWidth() / 2f, c.getHeight() / 2f, paint_gameOver);
+
+        // boost text
+        if (canPlay && boost >= 100f) c.drawText("BOOST READY", c.getWidth() / 2f, c.getHeight() - 150f, paint_fuel);
+
+        // score text
+        if (canPlay)
+            c.drawText("Distance: " + (int)(score * 100) / 100f, c.getWidth() / 2f, c.getHeight() - 90f, paint_score);
+        else
+        {
+            c.drawText("Distance Traveled: " + (int)(score * 100) / 100f, c.getWidth() / 2f, c.getHeight() / 2f + 100f, paint_fuel);
+            if (score > Global.highScore)
+            {
+                c.drawText("NEW HIGHSCORE!", c.getWidth() / 2f, c.getHeight() / 2f + 160f, paint_fuel);
+            }
+        }
 
         // stop drawing
         holder.unlockCanvasAndPost(c);
@@ -417,6 +467,22 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     public void onPause() {
         anim.finish();
         manager.unregisterListener(this, manager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER));
+        Global.highScore = score;
         super.onPause();
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        if(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
+            Log.d("Example","tap");
+
+            // attempt to boost
+            if (!isBoosting && boost >= 100)
+            {
+                isBoosting = true;
+            }
+        }
+
+        return false;
     }
 }

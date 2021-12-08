@@ -10,7 +10,7 @@ public class FallingMeteor extends FallingObject {
 
     @Override
     public void consequences(GameActivity game) {
-        if (game.lives > 0)
+        if (!game.isBoosting && game.lives > 0)
             game.lives--;
     }
 }
