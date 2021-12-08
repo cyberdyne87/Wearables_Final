@@ -19,6 +19,7 @@ import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -106,6 +107,15 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         // set up randomness
         randy = new Random();
 
+        //fit display
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        int height = metrics.heightPixels;
+        int width = metrics.widthPixels;
+
+        //testing
+        //Log.d("Test", "Hight: " + metrics.heightPixels + " Width: " + width);
+
         // bitmaps
         sprite_asteroid = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.asteroid), 256, 256, false);
         sprite_meteor = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.meteor), 196, 196, false);
@@ -113,7 +123,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         sprite_heart = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.heart), 128, 128, false);
         sprite_fuel = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.fuel), 128, 128, false);
         sprite_rocket = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.rocket), 256, 256, false);
-        sprite_starBackground = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.starsbackground_vtwo), 1080, 1920, false);
+        sprite_starBackground = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.starsbackground_vtwo), width, height, false);
         sprite_fuelgauge = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.fuelgage), 256, 256, false);
         sprite_fuelstick = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.fuelgagestick_adjusted), 480, 480, false);
 
