@@ -89,7 +89,7 @@ public class GPSLocation extends Service
     }
 
     //@Override
-    /*
+
     public void onStartCommand(Intent intent, int startId)
     {
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -106,7 +106,7 @@ public class GPSLocation extends Service
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 4000, 0, (LocationListener) myListener);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 4000, 0, myListener);
 
-    } */
+    }
 
 
 

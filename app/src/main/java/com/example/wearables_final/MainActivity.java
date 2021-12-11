@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         Global.currentLocation = 0;
 
         //Instantiate Trophy class
-        Trophy myTroph = new Trophy();
+        //Trophy myTroph = new Trophy();
 
         //cant request permissions within a service
         //we do this here instead, once location services are granted we can start the service -- Dylan
@@ -72,37 +72,37 @@ public class MainActivity extends AppCompatActivity {
                 {
                     Intent intent = new Intent(MainActivity.this, LunarLander.class);
                     startActivity(intent);
-                    myTroph.setImg(1);
+                    //myTroph.setImg(1);
                 }
                 else if (Global.currentLocation == 2)
                 {
                     Intent intent = new Intent(MainActivity.this, DodgeAndWeave.class);
                     startActivity(intent);
-                    myTroph.setImg(2);
+                    //myTroph.setImg(2);
                 }
                 else if (Global.currentLocation == 3)
                 {
                     Intent intent = new Intent(MainActivity.this, ConstellationDiscoverer.class);
                     startActivity(intent);
-                    myTroph.setImg(3);
+                    //myTroph.setImg(3);
                 }
                 else if (Global.currentLocation == 4)
                 {
                     Intent intent = new Intent(MainActivity.this, SpaceExplorer.class);
                     startActivity(intent);
-                    myTroph.setImg(4);
+                    //myTroph.setImg(4);
                 }
                 else if (Global.currentLocation == 5)
                 {
                     Intent intent = new Intent(MainActivity.this, EventHorizon.class);
                     startActivity(intent);
-                    myTroph.setImg(5);
+                    //myTroph.setImg(5);
                 }
                 else if (Global.currentLocation == 6)
                 {
                     Intent intent = new Intent(MainActivity.this, FinalFrontier.class);
                     startActivity(intent);
-                    myTroph.setImg(6);
+                    //myTroph.setImg(6);
                 }
 
             }

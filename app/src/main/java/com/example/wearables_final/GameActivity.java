@@ -444,7 +444,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        accel_x = sensorEvent.values[0];
+        accel_x = -sensorEvent.values[0];
         accel_y = sensorEvent.values[2];
         if (!canPlay)
         {
