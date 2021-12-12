@@ -58,7 +58,7 @@ public class GPSLocation extends Service
 
         eventHorizon = new Location(LocationManager.GPS_PROVIDER);
         eventHorizon.setLongitude(-155.576466);
-        eventHorizon.setLatitude(19.5363584 ); //Mauna Loa Observatory
+        eventHorizon.setLatitude(19.5363584); //Mauna Loa Observatory
 
         dodgeAndWeave = new Location(LocationManager.GPS_PROVIDER);
         dodgeAndWeave.setLongitude(-69.2305127);

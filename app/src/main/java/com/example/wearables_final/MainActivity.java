@@ -68,7 +68,12 @@ public class MainActivity extends AppCompatActivity {
         lunarlander.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Global.currentLocation == 1)
+                if (Global.currentLocation == 0)
+                {
+                    Intent intent = new Intent(MainActivity.this, GameActivity.class);
+                    startActivity(intent);
+                }
+                else if (Global.currentLocation == 1)
                 {
                     Intent intent = new Intent(MainActivity.this, LunarLander.class);
                     startActivity(intent);

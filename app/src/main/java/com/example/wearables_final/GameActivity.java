@@ -309,7 +309,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             objects.add(generateRandomObject(-400, 400));
 
             // reset timer by random amount
-            timeUntilNextObject = (randy.nextFloat() * 0.5f + 1f) * Global.speedUp;
+            timeUntilNextObject = (randy.nextFloat() * 0.5f + 1f) / Global.speedUp;
             if (isBoosting) timeUntilNextObject *= 0.5f;
         }
 
